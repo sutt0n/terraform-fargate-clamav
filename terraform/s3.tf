@@ -3,9 +3,9 @@ provider "aws" {
   alias = "east"
 }
 
-resource "aws_s3_bucket" "quarantine_bucket" {
+resource "aws_s3_bucket" "av_quarantine_bucket" {
   provider = aws.east
-  bucket   = "quarantine-bucket"
+  bucket   = "clamav-quarantine-bucket"
   acl      = "private"
 
   cors_rule {
@@ -15,15 +15,24 @@ resource "aws_s3_bucket" "quarantine_bucket" {
     max_age_seconds = 3000
   }
 
-  tags = {
-    environment = var.environment
-  }
-
   lifecycle_rule {
     enabled = true
 
     expiration {
       days = 7
     }
+  }
+}
+
+resource "aws_s3_bucket" "clamav_clean_bucket" {
+  provider = aws.east
+  bucket   = "clamav-clean-bucket"
+  acl      = "private"
+
+  cors_rule {
+    allowed_headers = ["Authorization"]
+    allowed_methods = ["GET", "POST"]
+    allowed_origins = ["*"]
+    max_age_seconds = 3000
   }
 }
