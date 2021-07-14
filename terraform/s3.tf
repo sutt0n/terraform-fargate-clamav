@@ -3,9 +3,9 @@ provider "aws" {
   alias = "east"
 }
 
-resource "aws_s3_bucket" "av_quarantine_bucket" {
+resource "aws_s3_bucket" "quarantine_bucket" {
   provider = aws.east
-  bucket   = "clamav-quarantine-bucket"
+  bucket   = "quarantine-bucket"
   acl      = "private"
 
   cors_rule {
@@ -24,9 +24,18 @@ resource "aws_s3_bucket" "av_quarantine_bucket" {
   }
 }
 
-resource "aws_s3_bucket" "clamav_clean_bucket" {
+resource "aws_s3_bucket_notification" "bucket_notification" {
+  bucket = data.aws_s3_bucket.quarantine_bucket.id
+
+  queue {
+    queue_arn = aws_sqs_queue.clamav_event_queue.arn
+    events    = ["s3:ObjectCreated:*"]
+  }
+}
+
+resource "aws_s3_bucket" "clean_bucket" {
   provider = aws.east
-  bucket   = "clamav-clean-bucket"
+  bucket   = "clean-bucket"
   acl      = "private"
 
   cors_rule {
