@@ -1,0 +1,19 @@
+{
+  "rules": [
+    {
+      "rulePriority": 1,
+      "description": "Keep last ${numberOfImages} images",
+      "selection": {
+        "tagStatus": "tagged",
+        "tagPrefixList": [
+          "SNAPSHOT-"
+        ],
+        "countType": "imageCountMoreThan",
+        "countNumber": ${numberOfImages}
+      },
+      "action": {
+        "type": "expire"
+      }
+    }
+  ]
+}
