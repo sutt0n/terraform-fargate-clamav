@@ -1,0 +1,19 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": [
+        "sqs:SendMessage",
+        "sqs:ReceiveMessage"
+      ],
+      "Resource": "arn:aws:sqs:*:*:s3_clamav_event_queue",
+      "Condition": {
+        "ArnEquals": {
+          "aws:SourceArn": "${bucketArn}"
+        }
+      }
+    }
+  ]
+}
