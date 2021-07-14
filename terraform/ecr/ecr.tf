@@ -1,9 +1,13 @@
+provider "aws" {
+  region = var.aws_region
+}
+
 resource "aws_ecr_repository" "image_repository" {
-  name = "ef-cms-us-east-1"
+  name = "fargate-images"
 }
 
 data "template_file" "repo_policy_file" {
-    template = file("templates/ecr_policy.tpl.json")
+    template = file("${path.module}/../templates/ecr_policy.tpl.json")
 
   vars = {
     numberOfImages = 5
