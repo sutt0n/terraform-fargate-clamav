@@ -7,7 +7,7 @@ data "aws_caller_identity" "current" {}
 
 resource "aws_s3_bucket" "quarantine_bucket" {
   provider = aws.east
-  bucket   = "quarantine-bucket"
+  bucket   = "clamav-quarantine-bucket"
   acl      = "private"
 
   cors_rule {
@@ -31,7 +31,7 @@ resource "aws_s3_bucket" "quarantine_bucket" {
 
 resource "aws_s3_bucket" "clean_bucket" {
   provider = aws.east
-  bucket   = "clean-bucket"
+  bucket   = "clamav-clean-bucket"
   acl      = "private"
 
   cors_rule {
@@ -68,4 +68,8 @@ resource "aws_s3_bucket_notification" "bucket_notification" {
   depends_on = [
     aws_sqs_queue.clamav_event_queue
   ]
+}
+
+resource "aws_cloudwatch_log_group" "clamav_fargate_log_group" {
+  name = "/aws/ecs/clamav_fargate"
 }

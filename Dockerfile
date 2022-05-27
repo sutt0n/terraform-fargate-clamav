@@ -23,8 +23,8 @@ RUN mkdir /var/run/clamav && \
 RUN freshclam
 
 COPY ./src/clamd.conf /etc/clamav/clamd.conf
-COPY ./src/clamav-cron.sh /etc/cron.daily/clamav.sh
 COPY ./src/consumer.js ./consumer.js
+RUN npm install
 ADD ./src/run.sh ./run.sh
 
 CMD ["bash", "./run.sh"]

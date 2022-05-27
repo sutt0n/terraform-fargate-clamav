@@ -17,6 +17,6 @@ terraform {
 }
 
 provider "aws" {
-  profile = "tf-clamav"
+  profile = "default"
   region  = "us-east-1"
 }
