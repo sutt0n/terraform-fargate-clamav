@@ -9,5 +9,4 @@ Repository for my article on scanning files with Terraform, Lambda, Fargate, Doc
 
 ## Testing
 
-1. For testing the valid file `npm run test:valid`
-2. For testing the virus file `npm run test:virus`
+1. For testing both the valid and virus files, run `./test-virus.sh`
