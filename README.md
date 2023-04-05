@@ -1,5 +1,5 @@
 # terraform-fargate-clamav
-Repository for my article on scanning files with Terraform, Lambda, Fargate, Docker, S3, SQS, and ClamAV.
+Repository for [an article](https://dev.to/sutt0n/scanning-files-with-clamav-on-aws-with-a-nodejs-fargate-sqs-consumer-with-terraform-5048) on scanning files with Terraform, Lambda, Fargate, Docker, S3, SQS, and ClamAV.
 
 ## Initialization
 
